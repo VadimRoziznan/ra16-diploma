@@ -1,25 +1,25 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+// catalogItemsSaga.js
+import { takeEvery, put, call } from 'redux-saga/effects';
 import { fetchCatalogItems } from '../../api/index.js';
 import {
-  FETCH_CATALOG_ITEMS_REQUEST,
-  FETCH_CATALOG_ITEMS_SUCCESS,
-  FETCH_CATALOG_ITEMS_FAILURE,
-} from '../actions/catalogItem.js';
+  fetchCatalogItemsRequest,
+  fetchCatalogItemsSuccess,
+  fetchCatalogItemsFailure,
+} from '../reducers/catalogItemsSlice.js';
 
 export function* fetchCatalogItemsSaga(action) {
-  const { categoryId, offset, searchQuery } = action;
   try {
-    const catalogItems = yield call(fetchCatalogItems, categoryId, offset, searchQuery);
-    yield put({
-      type: FETCH_CATALOG_ITEMS_SUCCESS,
-      catalogItems,
-      isLoadMore: offset > 0, // Указывает, добавляются ли данные
-    });
+    // Изменение: корректировка ключей action.payload
+    const { category, offset, search } = action.payload;
+    const catalogItems = yield call(fetchCatalogItems, category, offset, search);
+    console.log('Fetched catalogItems:', catalogItems); // <-- Проверьте здесь
+    yield put(fetchCatalogItemsSuccess({ catalogItems, isLoadMore: offset > 0 }));
   } catch (error) {
-    yield put({ type: FETCH_CATALOG_ITEMS_FAILURE, error });
+    // Изменение: передача сообщения об ошибке
+    yield put(fetchCatalogItemsFailure(error.message));
   }
 }
 
 export function* watchCatalogItemsSaga() {
-  yield takeEvery(FETCH_CATALOG_ITEMS_REQUEST, fetchCatalogItemsSaga);
+  yield takeEvery(fetchCatalogItemsRequest.type, fetchCatalogItemsSaga);
 }

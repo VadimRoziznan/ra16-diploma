@@ -36,7 +36,7 @@ function NavMenu() {
   return (
     <nav className="navbar navbar-expand-sm navbar-light bg-light">
       <Link className="navbar-brand" to="/">
-        <img src="./img/header-logo.png" alt="Bosa Noga" />
+        <img src="/img/header-logo.png?v=1" alt="Bosa Noga" />
       </Link>
       <div className="collapse navbar-collapse" id="navbarMain">
         <ul className="navbar-nav mr-auto">

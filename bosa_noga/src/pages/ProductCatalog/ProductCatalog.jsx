@@ -22,9 +22,9 @@ function ProductCatalog() {
   return (
     <>
       <Header />
-        <main className="container">
-          <div className="row">
-            <div className="col">
+      <main className="container">
+        <div className="row">
+          <div className="col">
               <Banner />
               <section className="catalog">
                 <h2 className="text-center">Каталог</h2>

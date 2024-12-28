@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCatalogItemsRequest } from '../../redux/actions/catalogItem';
+import { fetchCatalogItemsRequest } from '../../redux/reducers/catalogItemsSlice';
 import Error from '../Error/Error';
 import ProductCard from '../ProductCard/ProductCard';
 
@@ -15,24 +15,25 @@ function CatalogItems({ activeCategory, searchQuery }) {
     // Сбрасываем offset при смене категории или строки поиска и загружаем новые данные
     setOffset(0);
     dispatch(
-      fetchCatalogItemsRequest(
-        activeCategory === 'all' ? null : activeCategory,
-        0,
-        searchQuery,
-      ),
+      fetchCatalogItemsRequest({
+        category: activeCategory === 'all' ? null : activeCategory,
+        offset: 0,
+        search: searchQuery,
+      }),
     );
   }, [dispatch, activeCategory, searchQuery]);
-
+  
   const handleLoadMore = () => {
     // Увеличиваем offset и загружаем дополнительные данные
     const newOffset = offset + 6;
+    console.log('New Offset:', newOffset); // <-- Проверьте здесь
     setOffset(newOffset);
     dispatch(
-      fetchCatalogItemsRequest(
-        activeCategory === 'all' ? null : activeCategory,
-        newOffset,
-        searchQuery,
-      ),
+      fetchCatalogItemsRequest({
+        category: activeCategory === 'all' ? null : activeCategory,
+        offset: newOffset,
+        search: searchQuery,
+      }),
     );
   };
 

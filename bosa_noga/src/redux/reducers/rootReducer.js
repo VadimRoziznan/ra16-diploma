@@ -1,9 +1,9 @@
-import { combineReducers } from 'redux';
-import productsReducer from './productsReducer.js';
-import categoriesReducer from './categoriesReducer.js';
-import catalogItemsReducer from './catalogItemsReducer.js';
-import productDetailsReducer from './productDetailsReducer.js';
-import cartReducer from './cartReducer.js';
+import { combineReducers } from '@reduxjs/toolkit';
+import productsReducer from './productsSlice.js';
+import categoriesReducer from './categoriesSlice.js';
+import catalogItemsReducer from './catalogItemsSlice.js';
+import productDetailsReducer from './productDetailsSlice.js';
+import cartReducer from './cartSlice.js';
 
 const rootReducer = combineReducers({
   products: productsReducer,

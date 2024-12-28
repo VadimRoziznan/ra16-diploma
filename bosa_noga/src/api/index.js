@@ -24,15 +24,15 @@ export const fetchCategories = async () => {
   return data;
 };
 
-export const fetchCatalogItems = async (categoryId = null, offset = 0, searchQuery = '') => {
+export const fetchCatalogItems = async (category = null, offset = 0, searchQuery = '') => {
   const queryParams = new URLSearchParams();
-  if (categoryId) queryParams.append('categoryId', categoryId);
+  if (category) queryParams.append('categoryId', category); // Изменение: использование 'category'
   if (offset) queryParams.append('offset', offset);
   if (searchQuery) queryParams.append('q', searchQuery);
 
   const url = `http://localhost:7070/api/items?${queryParams.toString()}`;
+  console.log('url', url);
   const response = await fetch(url);
-
   if (!response.ok) {
     throw new Error(response.statusText);
   }
@@ -42,11 +42,13 @@ export const fetchCatalogItems = async (categoryId = null, offset = 0, searchQue
 };
 
 export const fetchOrder = async (order) => {
+  console.log('order2', order);
   const response = await fetch('http://localhost:7070/api/order', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(order),
   });
+  console.log('response', response);
   if (!response.ok) {
     throw new Error('Ошибка при оформлении заказа');
   }
@@ -54,5 +56,6 @@ export const fetchOrder = async (order) => {
     return null;
   }
   const data = await response.json();
+  console.log('data', data);
   return data;
 };

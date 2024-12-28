@@ -1,22 +1,22 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+// productsSaga.js
+import { takeEvery, put, call } from 'redux-saga/effects';
+import { fetchProducts } from '../../api/index.js';
 import {
-  fetchProducts,
-} from '../../api/index.js';
-import {
-  FETCH_PRODUCTS_REQUEST,
-  FETCH_PRODUCTS_SUCCESS,
-  FETCH_PRODUCTS_FAILURE,
-} from '../actions/products.js';
+  fetchProductsRequest,
+  fetchProductsSuccess,
+  fetchProductsFailure,
+} from './productsSlice.js';
 
 export function* fetchProductsSaga() {
   try {
     const products = yield call(fetchProducts);
-    yield put({ type: FETCH_PRODUCTS_SUCCESS, products });
+    yield put(fetchProductsSuccess(products));
   } catch (error) {
-    yield put({ type: FETCH_PRODUCTS_FAILURE, error });
+    yield put(fetchProductsFailure(error));
   }
 }
 
 export function* watchProductsSaga() {
-  yield takeEvery(FETCH_PRODUCTS_REQUEST, fetchProductsSaga);
+  console.log("Saga: Watching for fetchProductsRequest...");
+  yield takeEvery('products/fetchProductsRequest', fetchProductsSaga);
 }

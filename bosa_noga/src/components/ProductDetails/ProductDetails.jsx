@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchProductDetailsRequest } from '../../redux/actions/productDetails';
-import { addProductToCart } from '../../redux/actions/cart';
+import { fetchProductDetailsRequest } from '../../redux/reducers/productDetailsSlice';
+import { addProductToCart } from '../../redux/reducers/cartSlice';
 
 function ProductDetails() {
   const { id } = useParams(); // Получение id из URL
+  console.log('Product ID:', id);
   const dispatch = useDispatch();
   const { product, isLoading, error } = useSelector((state) => state.productDetails);
 

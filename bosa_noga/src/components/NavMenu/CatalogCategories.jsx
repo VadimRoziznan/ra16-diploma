@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCategoriesRequest } from '../../redux/actions/categories';
+import { fetchCategoriesRequest } from '../../redux/reducers/categoriesSlice';
 import Error from '../Error/Error';
 
 function CatalogCategories({ onCategoryChange }) {

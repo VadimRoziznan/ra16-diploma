@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { removeProductFromCart } from '../../redux/actions/cart';
-import { fetchOrderRequest } from '../../redux/actions/order';
+import { removeProductFromCart } from '../../redux/reducers/cartSlice';
+import { fetchOrderRequest } from '../../redux/reducers/orderSlice';
 import Header from '../../components/Header/Header';
 import Banner from '../../components/Banner/Banner';
 import Footer from '../../components/Footer/Footer';
@@ -26,7 +26,7 @@ function Order() {
         address: event.target.address.value,
       },
     };
-
+    console.log("order", order);
     dispatch(fetchOrderRequest(order));
   };
 
