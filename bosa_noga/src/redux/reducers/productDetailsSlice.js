@@ -1,14 +1,11 @@
-// productDetailsSlice.js
 import { createSlice } from '@reduxjs/toolkit';
 
-// Начальное состояние
 const initialState = {
   product: null,
   isLoading: false,
   error: null,
 };
 
-// Создаем слайс
 const productDetailsSlice = createSlice({
   name: 'productDetails',
   initialState,
@@ -28,12 +25,10 @@ const productDetailsSlice = createSlice({
   },
 });
 
-// Экспортируем сгенерированные экшен-криейторы
 export const {
   fetchProductDetailsRequest,
   fetchProductDetailsSuccess,
   fetchProductDetailsFailure,
 } = productDetailsSlice.actions;
 
-// Экспортируем редьюсер по умолчанию
 export default productDetailsSlice.reducer;

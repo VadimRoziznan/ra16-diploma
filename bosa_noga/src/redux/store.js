@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage'; // Используем localStorage
-import rootReducer from './reducers/rootReducer'; // Обновим rootReducer чуть позже
+import rootReducer from './reducers/rootReducer';
 import rootSaga from './sagas/rootSaga';
 import { cartMiddleware } from './middlewares/cartMiddleware'
 

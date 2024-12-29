@@ -26,7 +26,7 @@ function CatalogItems({ activeCategory, searchQuery }) {
   const handleLoadMore = () => {
     // Увеличиваем offset и загружаем дополнительные данные
     const newOffset = offset + 6;
-    console.log('New Offset:', newOffset); // <-- Проверьте здесь
+    console.log('New Offset:', newOffset);
     setOffset(newOffset);
     dispatch(
       fetchCatalogItemsRequest({

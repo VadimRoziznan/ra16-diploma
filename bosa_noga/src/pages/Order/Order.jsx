@@ -9,9 +9,7 @@ import Footer from '../../components/Footer/Footer';
 function Order() {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-
   const totalAmount = cart.reduce((sum, item) => sum + item.count * item.price, 0);
-
   const handleRemove = (id, size) => {
     dispatch(removeProductFromCart({ id, size }));
   };
@@ -26,7 +24,6 @@ function Order() {
         address: event.target.address.value,
       },
     };
-    console.log("order", order);
     dispatch(fetchOrderRequest(order));
   };
 

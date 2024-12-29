@@ -26,8 +26,10 @@ const categoriesSlice = createSlice({
   },
 });
 
-// Экспортируем сгенерированные экшен-криейторы
-export const { fetchCategoriesRequest, fetchCategoriesSuccess, fetchCategoriesFailure } = categoriesSlice.actions;
+export const { 
+  fetchCategoriesRequest, 
+  fetchCategoriesSuccess, 
+  fetchCategoriesFailure 
+} = categoriesSlice.actions;
 
-// Экспортируем редьюсер по умолчанию
 export default categoriesSlice.reducer;

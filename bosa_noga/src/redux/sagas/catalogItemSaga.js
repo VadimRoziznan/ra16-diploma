@@ -1,4 +1,3 @@
-// catalogItemsSaga.js
 import { takeEvery, put, call } from 'redux-saga/effects';
 import { fetchCatalogItems } from '../../api/index.js';
 import {
@@ -9,14 +8,13 @@ import {
 
 export function* fetchCatalogItemsSaga(action) {
   try {
-    // Изменение: корректировка ключей action.payload
-    const { category, offset, search } = action.payload;
-    const catalogItems = yield call(fetchCatalogItems, category, offset, search);
-    console.log('Fetched catalogItems:', catalogItems); // <-- Проверьте здесь
-    yield put(fetchCatalogItemsSuccess({ catalogItems, isLoadMore: offset > 0 }));
+    const catalogItems = yield call(fetchCatalogItems, action.payload.category, action.payload.offset, action.payload.search);
+    yield put(fetchCatalogItemsSuccess({
+      catalogItems,
+      isLoadMore: action.payload.offset > 0, // true, если это загрузка дополнительных данных
+    }));
   } catch (error) {
-    // Изменение: передача сообщения об ошибке
-    yield put(fetchCatalogItemsFailure(error.message));
+    yield put(fetchCatalogItemsFailure(error));
   }
 }
 

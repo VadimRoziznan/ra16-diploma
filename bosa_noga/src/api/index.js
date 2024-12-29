@@ -31,7 +31,6 @@ export const fetchCatalogItems = async (category = null, offset = 0, searchQuery
   if (searchQuery) queryParams.append('q', searchQuery);
 
   const url = `http://localhost:7070/api/items?${queryParams.toString()}`;
-  console.log('url', url);
   const response = await fetch(url);
   if (!response.ok) {
     throw new Error(response.statusText);
@@ -48,7 +47,6 @@ export const fetchOrder = async (order) => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(order),
   });
-  console.log('response', response);
   if (!response.ok) {
     throw new Error('Ошибка при оформлении заказа');
   }

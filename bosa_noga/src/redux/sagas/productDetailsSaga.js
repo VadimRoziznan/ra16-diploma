@@ -1,11 +1,10 @@
-// productDetailsSaga.js
 import { takeEvery, put, call } from 'redux-saga/effects';
 import { fetchProductsDetails } from '../../api/index.js';
 import {
   fetchProductDetailsRequest,
   fetchProductDetailsSuccess,
   fetchProductDetailsFailure,
-} from './productDetailsSlice.js';
+} from '../reducers/productDetailsSlice.js';
 
 export function* fetchProductDetailsSaga(action) {
   try {
@@ -17,5 +16,5 @@ export function* fetchProductDetailsSaga(action) {
 }
 
 export function* watchProductDetailsSaga() {
-  yield takeEvery('productDetails/fetchProductDetailsRequest', fetchProductDetailsSaga);
+  yield takeEvery(fetchProductDetailsRequest.type, fetchProductDetailsSaga);
 }

@@ -5,42 +5,41 @@ import {
   fetchOrderSuccess,
   fetchOrderFailure,
 } from '../reducers/orderSlice';
+import { clearCart } from '../reducers/cartSlice';
 import Swal from 'sweetalert2';
 
-// Сага для обработки оформления заказа
 export function* fetchOrderSaga(action) {
   try {
-    const { payload: order } = action; // В Redux Toolkit данные передаются через payload
-    const data = yield call(fetchOrder, order);
+    // Выполняем запрос на оформление заказа
+    const data = yield call(fetchOrder, action.payload);
 
-    // Уведомление об успехе
+    // Уведомление об успешном оформлении заказа
     yield Swal.fire({
       icon: 'success',
       title: 'Заказ оформлен успешно!',
       confirmButtonText: 'Заказ принят',
     });
 
-    // Очистка корзины и перезагрузка страницы
-    localStorage.removeItem('cart');
-    window.location.reload();
+    // Очистка корзины и обновление страницы
+    yield put(clearCart()); // Очистка состояния корзины в Redux
+    localStorage.removeItem('cart'); // Очистка localStorage
 
-    // Диспатчим успешное оформление заказа
+    // Диспатчим успешный результат
     yield put(fetchOrderSuccess(data));
   } catch (error) {
     // Уведомление об ошибке
     yield Swal.fire({
       icon: 'error',
       title: 'Ошибка при оформлении заказа',
-      text: error.message,
       confirmButtonText: 'Попробовать снова',
     });
 
     // Диспатчим ошибку
-    yield put(fetchOrderFailure(error.message));
+    yield put(fetchOrderFailure(error));
   }
 }
 
-// Сага для слежения за экшеном fetchOrderRequest
+
 export function* watchOrderSaga() {
   yield takeEvery(fetchOrderRequest.type, fetchOrderSaga);
 }

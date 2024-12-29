@@ -33,8 +33,10 @@ const catalogItemsSlice = createSlice({
   },
 });
 
-// Экспортируем сгенерированные экшен-криейторы
-export const { fetchCatalogItemsRequest, fetchCatalogItemsSuccess, fetchCatalogItemsFailure } = catalogItemsSlice.actions;
+export const { 
+  fetchCatalogItemsRequest, 
+  fetchCatalogItemsSuccess, 
+  fetchCatalogItemsFailure 
+} = catalogItemsSlice.actions;
 
-// Экспортируем редьюсер по умолчанию
 export default catalogItemsSlice.reducer;

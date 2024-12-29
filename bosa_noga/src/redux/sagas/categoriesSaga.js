@@ -1,11 +1,10 @@
-// categoriesSaga.js
 import { takeEvery, put, call } from 'redux-saga/effects';
 import { fetchCategories } from '../../api/index.js';
 import {
   fetchCategoriesRequest,
   fetchCategoriesSuccess,
   fetchCategoriesFailure,
-} from './categoriesSlice.js';
+} from '../reducers/categoriesSlice.js';
 
 export function* fetchCategoriesSaga() {
   try {

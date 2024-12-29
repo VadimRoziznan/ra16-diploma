@@ -1,5 +1,3 @@
-// cartMiddleware.js
-
 export const cartMiddleware = (store) => (next) => (action) => {
   const result = next(action); // Передаем действие дальше в цепочку
 
@@ -10,5 +8,5 @@ export const cartMiddleware = (store) => (next) => (action) => {
     localStorage.setItem('cart', JSON.stringify(cart)); // Сохраняем её в localStorage
   }
 
-  return result; // Возвращаем результат
+  return result;
 };
